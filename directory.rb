@@ -12,9 +12,22 @@ students = [
     "Joffrey Baratheon",
     "Norman Bates"
 ]
-# print a list of students under a heading
-puts "The students of Villains Academy"
-puts "-------------"
-students.each { |student| puts student }
-# print the student count
-puts "Overall we have #{students.count} great students"
+
+# create methods to print each section
+def print_header
+    puts "The students of Villains Academy"
+    puts "-------------"
+end
+
+def print(names)
+    names.each { |name| puts name }
+end
+
+def print_footer(names)
+    puts "Overall we have #{names.count} great students"
+end
+
+# call the methods
+print_header
+print(students)
+print_footer(students)
