@@ -4,6 +4,6 @@ The student directory script allows you to maanage the list of students enrolled
 
 ## How to use
 
-***shell
+```shell
 ruby directory.rb
-***
+```
