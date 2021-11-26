@@ -1,5 +1,5 @@
 # EXERCISES TO COMPLETE:
-# 1 Print 1. 2. 3. etc in front of students names using each_with_index()
+# fin 1 Print 1. 2. 3. etc in front of students names using each_with_index()
 # 2 Modify to print only students starting with a specific letter
 # 3 Modify your program to print student only if name length < 12
 # 4 Rewrite each() using while or until loops
@@ -42,7 +42,7 @@ end
 
 def print(students)
     students.each_with_index do |student, index| 
-        puts "#{student[:name]} (#{student[:cohort]} cohort)"
+        puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
     end
 end
 
