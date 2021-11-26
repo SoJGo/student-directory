@@ -2,7 +2,7 @@
 # fin 1 Print 1. 2. 3. etc in front of students names using each_with_index()
 # fin 2 Modify to print only students starting with a specific letter
         # have asked user if they would like to filter and for letter
-# 3 Modify your program to print student only if name length < 12
+# fin 3 Modify your program to print student only if name length < 12
 # 4 Rewrite each() using while or until loops
 # 5 Add more information, hobbies, country of birth, height etc
 # 6 Research the method center() of String class. Use to make output aligned
@@ -21,6 +21,7 @@
 # create method to get input of names
 def input_students
     puts "Enter a students name, then press enter"
+    puts "Please be aware entries with names over 11 characters will not be shown"
     puts "To finish, hit return twice"
 
     students = []
@@ -59,19 +60,14 @@ def print_header
 end
 
 def print(students, letter)
-    if letter == "no"
-        students.each_with_index do |student, index|
+    students.each_with_index do |student, index|
+        if letter == "NO" && student[:name].length < 12
             puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+        elsif student[:name][0].upcase == letter && student[:name].length < 12
+            puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+        else
+            puts "#{index + 1}. ---student not shown---"
         end
-    else
-        students.each_with_index do |student, index|
-            if student[:name][0].upcase == letter
-                puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
-            else
-                puts "#{index + 1}. ---student not shown---"
-            end
-        end
-        
     end
 end
 
