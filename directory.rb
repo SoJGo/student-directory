@@ -60,14 +60,16 @@ def print_header
 end
 
 def print(students, letter)
-    students.each_with_index do |student, index|
-        if letter == "NO" && student[:name].length < 12
-            puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
-        elsif student[:name][0].upcase == letter && student[:name].length < 12
-            puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+    i = 0 
+    while i < students.length
+        if letter == "NO" && students[i][:name].length < 12
+            puts "#{i + 1}. #{students[i][:name]} (#{students[i][:cohort]} cohort)"
+        elsif students[i][:name][0].upcase == letter && students[i][:name].length < 12
+            puts "#{i + 1}. #{students[i][:name]} (#{students[i][:cohort]} cohort)"
         else
-            puts "#{index + 1}. ---student not shown---"
+            puts "#{i + 1}. ---student not shown---"
         end
+        i += 1
     end
 end
 
