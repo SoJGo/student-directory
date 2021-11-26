@@ -1,6 +1,7 @@
 # EXERCISES TO COMPLETE:
 # fin 1 Print 1. 2. 3. etc in front of students names using each_with_index()
-# 2 Modify to print only students starting with a specific letter
+# fin 2 Modify to print only students starting with a specific letter
+        # have asked user if they would like to filter and for letter
 # 3 Modify your program to print student only if name length < 12
 # 4 Rewrite each() using while or until loops
 # 5 Add more information, hobbies, country of birth, height etc
@@ -34,15 +35,43 @@ def input_students
     students
 end
 
+# create a method to ask if names should be filtered by a letter
+def print_letter_filter
+    filter_letter = ""
+    until filter_letter == "yes" || filter_letter == "no"
+        puts "Would you only like to show students starting with a specific letter? (yes/no)"
+        filter_letter = gets.chomp.downcase
+    end
+    if filter_letter == "yes"
+        until filter_letter =~ /[a-zA-Z]/ && filter_letter.length == 1
+            puts "What letter would you like to show?"
+            filter_letter = gets.chomp
+        end
+    end
+    filter_letter.upcase
+end
+
+
 # create methods to print each section
 def print_header
     puts "The students of Villains Academy"
     puts "-------------"
 end
 
-def print(students)
-    students.each_with_index do |student, index| 
-        puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+def print(students, letter)
+    if letter == "no"
+        students.each_with_index do |student, index|
+            puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+        end
+    else
+        students.each_with_index do |student, index|
+            if student[:name][0].upcase == letter
+                puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+            else
+                puts "#{index + 1}. ---student not shown---"
+            end
+        end
+        
     end
 end
 
@@ -52,6 +81,7 @@ end
 
 # call the methods
 students = input_students
+letter = print_letter_filter
 print_header
-print(students)
+print(students, letter)
 print_footer(students)
