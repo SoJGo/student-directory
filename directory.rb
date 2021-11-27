@@ -5,11 +5,11 @@
 # fin 3 Modify your program to print student only if name length < 12
 # fin 4 Rewrite each() using while or until loops
 # 5 Add more information, hobbies, country of birth, height etc
-# 6 Research the method center() of String class. Use to make output aligned
-# 7 Ask for input for name and cohort in input_students method. Consider:
-    # for empty values – add default
-	# convert string to symbol
-	# what if user makes a typo
+# fin 6 Research the method center() of String class. Use to make output aligned
+# fin 7 Ask for input for name and cohort in input_students method. Consider:
+        # for empty values – add default
+	    # convert string to symbol
+	    # what if user makes a typo
 # 8 Change the way users are displayed – grouped by cohorts 
 # 9 Change to print “...we have 1 student” not students when only one student
 # 10 Find a method to replace chomp(), it will require passing arguments
@@ -19,19 +19,37 @@
 
 # create method to get input of names
 def input_students
-    puts "Enter a students name, then press enter"
+    puts "When prompted please enter student's information and press enter"
     puts "Please be aware entries with names over 11 characters will not be shown"
-    puts "To finish, hit return twice"
 
     students = []
-    name = gets.chomp
+    cohorts = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december", ""]
+    name = ""
+    cohort_str = "month"
+    add_more = "yes"
 
-    while !name.empty? do
-        students << {name: name, cohort: :november}
-        puts "Now we have #{students.count} students"
-        name = gets.chomp
+    while add_more == "yes"
+        while name.empty? do
+            puts "Enter student's name:"
+            name = gets.chomp
+        end
+        until cohorts.include?(cohort_str)
+            puts "Enter student's cohort:"
+            cohort_str = gets.chomp
+            cohort = (cohort_str == "" ? "no assigned cohort" : cohort_str.to_sym)
+        end
+        add_more = ""
+        until add_more == "yes" || add_more == "no"
+            puts "Would you like to add another student? (yes/no)"
+            add_more = gets.chomp.downcase
+        end
+        
+        students << {name: name, cohort: cohort}
+        
+        name = ""
+        cohort_str = "month"
     end
-
+   
     students
 end
 
@@ -50,7 +68,6 @@ def print_letter_filter
     end
     filter_letter.upcase
 end
-
 
 # create methods to print each section
 def print_header
