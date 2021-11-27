@@ -13,7 +13,7 @@
 # fin 8 Change the way users are displayed – grouped by cohorts 
 # fin 9 Change to print “...we have 1 student” not students when only one student
 # fin 10 Find a method to replace chomp(), it will require passing arguments
-# 11 Typo finding exercise – see branch exercise_11
+#     11 Typo finding exercise – see branch exercise_11
 # fin 12 Only print the list if there is at least one student
         # as it is inbuilt that you cannot proceed without entering studen information
         # added an escape option at the start if no students are to be entered
@@ -44,12 +44,12 @@ def input_students
     while add_more == "yes"
         while name.empty? do
             puts "Enter student's name:"
-            name = gets.gsub(/[\n]/, "")
+            name = gets.gsub(/[\n]/, "").capitalize
         end
         until cohorts.include?(cohort_str)
             puts "Enter student's cohort:"
             cohort_str = gets.gsub(/[\n]/, "").downcase
-            cohort = (cohort_str == "" ? "no assigned cohort" : cohort_str.to_sym)
+            cohort = (cohort_str == "" ? "no assigned cohort" : cohort_str.capitalize.to_sym)
         end
         until height_str =~ /[0-9]/
             puts "Enter student's height in cm:"
@@ -59,11 +59,11 @@ def input_students
         
         puts "Enter student's planet, dimension or realm of origin:"
         origin = gets.gsub(/[\n]/, "")
-        origin = (origin == "" ? "unknown origins" : origin)
+        origin = (origin == "" ? "unknown origins" : origin.capitalize)
         
         puts "Please enter student's favourite colour:"
         colour = gets.gsub(/[\n]/, "")
-        colour = (colour == "" ? "probably purple" : colour)
+        colour = (colour == "" ? "probably purple" : colour.downcase)
         
         add_more = ""
         until add_more == "yes" || add_more == "no"
@@ -104,7 +104,7 @@ def print_header
 end
 
 def print(students, letter)
-    cohorts = [:january, :february, :march, :april, :may, :june, :july, :august, :september, :october, :november, :december, "no assigned cohort"]
+    cohorts = [:January, :February, :March, :April, :May, :June, :July, :August, :September, :October, :November, :December, "No assigned cohort"]
     
     by_cohort = []
     c = 0 
@@ -115,14 +115,11 @@ def print(students, letter)
 
     i = 0 
     while i < by_cohort.length     
-        if letter == "NO" && by_cohort[i][:name].length < 12 
+        if (letter == "NO" && by_cohort[i][:name].length < 12 ) || 
+            (by_cohort[i][:name][0].upcase == letter && by_cohort[i][:name].length < 12)
             puts "#{i + 1}. #{by_cohort[i][:name]} (#{by_cohort[i][:cohort]} cohort)".center(60)
-            puts "standing #{by_cohort[i][:height]}cm tall and hailing from #{by_cohort[i][:origin]}".center(60)
-            puts "their favourite colour is #{by_cohort[i][:colour]}".center(60)
-        elsif by_cohort[i][:name][0].upcase == letter && by_cohort[i][:name].length < 12
-            puts "#{i + 1}. #{by_cohort[i][:name]} (#{by_cohort[i][:cohort]} cohort)".center(60)
-            puts "standing #{by_cohort[i][:height]}cm tall and hailing from #{by_cohort[i][:origin]}".center(60)
-            puts "their favourite colour is #{by_cohort[i][:colour]}".center(60)
+            puts "Standing #{by_cohort[i][:height]}cm tall and hailing from #{by_cohort[i][:origin]}".center(60)
+            puts "Their favourite colour is #{by_cohort[i][:colour]}".center(60)
         else
             puts "#{i + 1}.---student not shown---".center(60)
             puts "---------".center(60)
