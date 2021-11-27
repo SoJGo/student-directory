@@ -14,11 +14,23 @@
 # fin 9 Change to print “...we have 1 student” not students when only one student
 # fin 10 Find a method to replace chomp(), it will require passing arguments
 # 11 Typo finding exercise – see branch exercise_11
-# 12 Only print the list if there is at least one student
+# fin 12 Only print the list if there is at least one student
+        # as it is inbuilt that you cannot proceed without entering studen information
+        # added an escape option at the start if no students are to be entered
 # ----------
 
 # create method to get input of names
 def input_students
+    start = ""
+    until start == "yes"
+        puts "Would you like to create a list of students? (yes/no)"
+        start = gets.gsub(/[\n]/, "").downcase
+        if start == "no"
+            puts "This is not the program you are looking for"
+            exit
+        end
+    end
+    
     puts "When prompted please enter student's information and press enter"
     puts "Please be aware entries with names over 11 characters will not be shown"
 
@@ -36,7 +48,7 @@ def input_students
         end
         until cohorts.include?(cohort_str)
             puts "Enter student's cohort:"
-            cohort_str = gets.gsub(/[\n]/, "")
+            cohort_str = gets.gsub(/[\n]/, "").downcase
             cohort = (cohort_str == "" ? "no assigned cohort" : cohort_str.to_sym)
         end
         until height_str =~ /[0-9]/
