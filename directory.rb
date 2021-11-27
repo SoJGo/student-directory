@@ -12,7 +12,7 @@
 	    # what if user makes a typo
 # fin 8 Change the way users are displayed – grouped by cohorts 
 # fin 9 Change to print “...we have 1 student” not students when only one student
-# 10 Find a method to replace chomp(), it will require passing arguments
+# fin 10 Find a method to replace chomp(), it will require passing arguments
 # 11 Typo finding exercise – see branch exercise_11
 # 12 Only print the list if there is at least one student
 # ----------
@@ -32,31 +32,31 @@ def input_students
     while add_more == "yes"
         while name.empty? do
             puts "Enter student's name:"
-            name = gets.chomp
+            name = gets.gsub(/[\n]/, "")
         end
         until cohorts.include?(cohort_str)
             puts "Enter student's cohort:"
-            cohort_str = gets.chomp
+            cohort_str = gets.gsub(/[\n]/, "")
             cohort = (cohort_str == "" ? "no assigned cohort" : cohort_str.to_sym)
         end
         until height_str =~ /[0-9]/
             puts "Enter student's height in cm:"
-            height_str = gets.chomp
+            height_str = gets.gsub(/[\n]/, "")
             height = (height_str == "" ? "mystery" : height_str.to_i)
         end
         
         puts "Enter student's planet, dimension or realm of origin:"
-        origin = gets.chomp
+        origin = gets.gsub(/[\n]/, "")
         origin = (origin == "" ? "unknown origins" : origin)
         
         puts "Please enter student's favourite colour:"
-        colour = gets.chomp
+        colour = gets.gsub(/[\n]/, "")
         colour = (colour == "" ? "probably purple" : colour)
         
         add_more = ""
         until add_more == "yes" || add_more == "no"
             puts "Would you like to add another student? (yes/no)"
-            add_more = gets.chomp.downcase
+            add_more = gets.gsub(/[\n]/, "").downcase
         end
 
         students << {name: name, cohort: cohort, height: height, origin: origin, colour: colour}
@@ -74,12 +74,12 @@ def print_letter_filter
     filter_letter = ""
     until filter_letter == "yes" || filter_letter == "no"
         puts "Would you only like to show students starting with a specific letter? (yes/no)"
-        filter_letter = gets.chomp.downcase
+        filter_letter = gets.gsub(/[\n]/, "").downcase
     end
     if filter_letter == "yes"
         until filter_letter =~ /[a-zA-Z]/ && filter_letter.length == 1
             puts "What letter would you like to show?"
-            filter_letter = gets.chomp
+            filter_letter = gets.gsub(/[\n]/, "")
         end
     end
     filter_letter.upcase
