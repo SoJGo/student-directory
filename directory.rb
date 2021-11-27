@@ -26,6 +26,7 @@ def input_students
     cohorts = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december", ""]
     name = ""
     cohort_str = "month"
+    height = ""
     add_more = "yes"
 
     while add_more == "yes"
@@ -38,16 +39,31 @@ def input_students
             cohort_str = gets.chomp
             cohort = (cohort_str == "" ? "no assigned cohort" : cohort_str.to_sym)
         end
+        until height =~ /[0-9]/
+            puts "Enter student's height in cm:"
+            height = gets.chomp
+            height = (height == "" ? "mystery" : height)
+        end
+        
+        puts "Enter student's planet, dimension or realm of origin:"
+        origin = gets.chomp
+        origin = (origin == "" ? "unknown origins" : origin)
+        
+        puts "Please enter student's favourite colour:"
+        colour = gets.chomp
+        colour = (colour == "" ? "probably purple" : colour)
+        
         add_more = ""
         until add_more == "yes" || add_more == "no"
             puts "Would you like to add another student? (yes/no)"
             add_more = gets.chomp.downcase
         end
-        
-        students << {name: name, cohort: cohort}
+
+        students << {name: name, cohort: cohort, height: height, origin: origin, colour: colour}
         
         name = ""
         cohort_str = "month"
+        height = ""
     end
    
     students
@@ -80,10 +96,16 @@ def print(students, letter)
     while i < students.length
         if letter == "NO" && students[i][:name].length < 12
             puts "#{i + 1}. #{students[i][:name]} (#{students[i][:cohort]} cohort)".center(60)
+            puts "standing #{students[i][:height]}cm tall and hailing from #{students[i][:origin]}".center(60)
+            puts "their favourite colour is #{students[i][:colour]}".center(60)
         elsif students[i][:name][0].upcase == letter && students[i][:name].length < 12
             puts "#{i + 1}. #{students[i][:name]} (#{students[i][:cohort]} cohort)".center(60)
+            puts "standing #{students[i][:height]}cm tall and hailing from #{students[i][:origin]}".center(60)
+            puts "their favourite colour is #{students[i][:colour]}".center(60)
         else
+            puts "---------".center(60)
             puts "#{i + 1}. ---student not shown---".center(60)
+            puts "---------".center(60)
         end
         puts "---".center(60)
         i += 1
