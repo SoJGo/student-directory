@@ -3,7 +3,7 @@
 # fin 2 Modify to print only students starting with a specific letter
         # have asked user if they would like to filter and for letter
 # fin 3 Modify your program to print student only if name length < 12
-# 4 Rewrite each() using while or until loops
+# fin 4 Rewrite each() using while or until loops
 # 5 Add more information, hobbies, country of birth, height etc
 # 6 Research the method center() of String class. Use to make output aligned
 # 7 Ask for input for name and cohort in input_students method. Consider:
@@ -11,7 +11,6 @@
 	# convert string to symbol
 	# what if user makes a typo
 # 8 Change the way users are displayed – grouped by cohorts 
-    # (or any category from input?)
 # 9 Change to print “...we have 1 student” not students when only one student
 # 10 Find a method to replace chomp(), it will require passing arguments
 # 11 Typo finding exercise – see branch exercise_11
@@ -55,26 +54,28 @@ end
 
 # create methods to print each section
 def print_header
-    puts "The students of Villains Academy"
-    puts "-------------"
+    puts "The students of Villains Academy".center(60)
+    puts "-------------------------------".center(60)
 end
 
 def print(students, letter)
     i = 0 
     while i < students.length
         if letter == "NO" && students[i][:name].length < 12
-            puts "#{i + 1}. #{students[i][:name]} (#{students[i][:cohort]} cohort)"
+            puts "#{i + 1}. #{students[i][:name]} (#{students[i][:cohort]} cohort)".center(60)
         elsif students[i][:name][0].upcase == letter && students[i][:name].length < 12
-            puts "#{i + 1}. #{students[i][:name]} (#{students[i][:cohort]} cohort)"
+            puts "#{i + 1}. #{students[i][:name]} (#{students[i][:cohort]} cohort)".center(60)
         else
-            puts "#{i + 1}. ---student not shown---"
+            puts "#{i + 1}. ---student not shown---".center(60)
         end
+        puts "---".center(60)
         i += 1
     end
 end
 
 def print_footer(students)
-    puts "Overall we have #{students.count} great students"
+    puts "Overall we have #{students.count} great students".center(60)
+    puts "-------------------------------".center(60)
 end
 
 # call the methods
