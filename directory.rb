@@ -4,7 +4,7 @@
         # have asked user if they would like to filter and for letter
 # fin 3 Modify your program to print student only if name length < 12
 # fin 4 Rewrite each() using while or until loops
-# 5 Add more information, hobbies, country of birth, height etc
+# fin 5 Add more information, hobbies, country of birth, height etc
 # fin 6 Research the method center() of String class. Use to make output aligned
 # fin 7 Ask for input for name and cohort in input_students method. Consider:
         # for empty values – add default
@@ -26,7 +26,7 @@ def input_students
     cohorts = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december", ""]
     name = ""
     cohort_str = "month"
-    height = ""
+    height_str = ""
     add_more = "yes"
 
     while add_more == "yes"
@@ -39,10 +39,10 @@ def input_students
             cohort_str = gets.chomp
             cohort = (cohort_str == "" ? "no assigned cohort" : cohort_str.to_sym)
         end
-        until height =~ /[0-9]/
+        until height_str =~ /[0-9]/
             puts "Enter student's height in cm:"
-            height = gets.chomp
-            height = (height == "" ? "mystery" : height)
+            height_str = gets.chomp
+            height = (height_str == "" ? "mystery" : height_str.to_i)
         end
         
         puts "Enter student's planet, dimension or realm of origin:"
@@ -63,7 +63,7 @@ def input_students
         
         name = ""
         cohort_str = "month"
-        height = ""
+        height_str = ""
     end
    
     students
@@ -92,23 +92,32 @@ def print_header
 end
 
 def print(students, letter)
+    cohorts = [:january, :february, :march, :april, :may, :june, :july, :august, :september, :october, :november, :december, "no assigned cohort"]
+    
+    by_cohort = []
+    c = 0 
+    while c < cohorts.length
+        students.each{ |student| student[:cohort] == cohorts[c] ? by_cohort << student : nil }
+        c += 1
+    end
+
     i = 0 
-    while i < students.length
-        if letter == "NO" && students[i][:name].length < 12
-            puts "#{i + 1}. #{students[i][:name]} (#{students[i][:cohort]} cohort)".center(60)
-            puts "standing #{students[i][:height]}cm tall and hailing from #{students[i][:origin]}".center(60)
-            puts "their favourite colour is #{students[i][:colour]}".center(60)
-        elsif students[i][:name][0].upcase == letter && students[i][:name].length < 12
-            puts "#{i + 1}. #{students[i][:name]} (#{students[i][:cohort]} cohort)".center(60)
-            puts "standing #{students[i][:height]}cm tall and hailing from #{students[i][:origin]}".center(60)
-            puts "their favourite colour is #{students[i][:colour]}".center(60)
+    while i < by_cohort.length     
+        if letter == "NO" && by_cohort[i][:name].length < 12 
+            puts "#{i + 1}. #{by_cohort[i][:name]} (#{by_cohort[i][:cohort]} cohort)".center(60)
+            puts "standing #{by_cohort[i][:height]}cm tall and hailing from #{by_cohort[i][:origin]}".center(60)
+            puts "their favourite colour is #{by_cohort[i][:colour]}".center(60)
+        elsif by_cohort[i][:name][0].upcase == letter && by_cohort[i][:name].length < 12
+            puts "#{i + 1}. #{by_cohort[i][:name]} (#{by_cohort[i][:cohort]} cohort)".center(60)
+            puts "standing #{by_cohort[i][:height]}cm tall and hailing from #{by_cohort[i][:origin]}".center(60)
+            puts "their favourite colour is #{by_cohort[i][:colour]}".center(60)
         else
+            puts "#{i + 1}.---student not shown---".center(60)
             puts "---------".center(60)
-            puts "#{i + 1}. ---student not shown---".center(60)
-            puts "---------".center(60)
+            puts "-------".center(60)
         end
         puts "---".center(60)
-        i += 1
+        i += 1        
     end
 end
 
