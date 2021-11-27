@@ -10,8 +10,8 @@
         # for empty values – add default
 	    # convert string to symbol
 	    # what if user makes a typo
-# 8 Change the way users are displayed – grouped by cohorts 
-# 9 Change to print “...we have 1 student” not students when only one student
+# fin 8 Change the way users are displayed – grouped by cohorts 
+# fin 9 Change to print “...we have 1 student” not students when only one student
 # 10 Find a method to replace chomp(), it will require passing arguments
 # 11 Typo finding exercise – see branch exercise_11
 # 12 Only print the list if there is at least one student
@@ -122,7 +122,7 @@ def print(students, letter)
 end
 
 def print_footer(students)
-    puts "Overall we have #{students.count} great students".center(60)
+    puts "Overall we have #{students.count} great student#{students.count > 1 ? "s" : nil }".center(60)
     puts "-------------------------------".center(60)
 end
 
