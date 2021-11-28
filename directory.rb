@@ -13,7 +13,7 @@
 # fin 8 Change the way users are displayed – grouped by cohorts 
 # fin 9 Change to print “...we have 1 student” not students when only one student
 # fin 10 Find a method to replace chomp(), it will require passing arguments
-#     11 Typo finding exercise – see branch exercise_11
+#     11 Typo finding exercise – see typo_finding.txt
 # fin 12 Only print the list if there is at least one student
         # as it is inbuilt that you cannot proceed without entering studen information
         # added an escape option at the start if no students are to be entered
