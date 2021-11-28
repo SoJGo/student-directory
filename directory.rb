@@ -1,3 +1,29 @@
+# create an interactive menu
+def interactive_menu
+    students = []
+    loop do
+        # 1. print menu options
+        puts "1. Input students"
+        puts "2. Show students"
+        puts "9. Exit"
+        # 2. get selection from user
+        selection = gets.chomp
+        # 3. do what the user has asked
+        case selection
+        when "1"
+            students = input_students
+        when "2"
+            print_header
+            print(students)
+            print_footer(students)
+        when "9"
+            exit # terminate program
+        else
+            puts "Please choose a number 1 - 9"
+      end
+    end
+end
+
 # create method to get input of names
 def input_students
     puts "Enter a students name, then press enter"
@@ -31,8 +57,4 @@ def print_footer(students)
     puts "Overall we have #{students.count} great students"
 end
 
-# call the methods
-students = input_students
-print_header
-print(students)
-print_footer(students)
+interactive_menu
