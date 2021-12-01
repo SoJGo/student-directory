@@ -7,10 +7,12 @@ def interactive_menu
     end
 end
 
+# methods within interactive_menu
 def print_menu
     puts "1. Input students"
     puts "2. Show students"
     puts "3. Save the list to students.csv"
+    puts "4. Load the list from students.csv"
     puts "9. Exit"
 end
 
@@ -22,6 +24,8 @@ def process(selection)
         show_students
     when "3"
         save_students
+    when "4"
+        load_students
     when "9"
         exit # terminate program 
     else
@@ -44,6 +48,12 @@ def input_students
     @students
 end
 
+def show_students
+    print_header
+    print_students_list
+    print_footer
+end
+
 def save_students
     file = File.open("students.csv", "w")
     @students.each do |student|
@@ -54,13 +64,16 @@ def save_students
     file.close
 end
 
-# methods to print 
-def show_students
-    print_header
-    print_students_list
-    print_footer
+def load_students
+    file = File.open("students.csv", "r")
+    file.readlines.each do |line|
+        name, cohort = line.chomp.split(',')
+        @students << {name: name, cohort: cohort.to_sym}
+    end
+  file.close 
 end
 
+# methods within show_students
 def print_header
     puts "The students of Villains Academy"
     puts "-------------"
