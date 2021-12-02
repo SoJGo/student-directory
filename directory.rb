@@ -1,9 +1,23 @@
 @students = []
 
+# load students from command line argument file, if file exists
+def try_load_students
+    filename = ARGV.first
+    return if filename.nil?
+    if File.exists?(filename)
+        load_students(filename)
+        puts "Loaded #{"students.count"} from #{filename}"
+    else 
+        puts "Sorry, #{filename} doesn't exist"
+        exit
+    end
+end
+
+# get input of desired action from user
 def interactive_menu
     loop do
         print_menu
-        process(gets.chomp)
+        process(STDIN.gets.chomp)
     end
 end
 
@@ -29,7 +43,7 @@ def process(selection)
     when "9"
         exit # terminate program 
     else
-        puts "Please choose a number 1 - 9" 
+        puts "Please choose a number: 1 - 9" 
   end
 end
 
@@ -37,12 +51,12 @@ def input_students
     puts "Enter a students name, then press enter"
     puts "To finish, hit return twice"
 
-    name = gets.chomp
+    name = STDIN.gets.chomp
 
     while !name.empty? do
         @students << {name: name, cohort: :november}
         puts "Now we have #{@students.count} students"
-        name = gets.chomp
+        name = STDIN.gets.chomp
     end
 
     @students
@@ -89,4 +103,5 @@ def print_footer
     puts "Overall we have #{@students.count} great students"
 end
 
+try_load_students
 interactive_menu
