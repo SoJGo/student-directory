@@ -1,3 +1,13 @@
+# EXERCISES TO COMPLETE:
+# 1. Extract the addition of students to @students[] within load_students() and input_students() into new method.
+# 2. Make program load students.csv as default if no file given on startup. Change necessary methods.
+# 3. Refactor. Consider: method too long, name not clear enough, elegance.
+# 4. Add feedback messages for if menu selection completed successfully.
+# 5. Menu options 3 and 4, remove hardcoding of filename, ask for input.
+# 6. Use code block to access file, not having to close it explicitly.
+# 7. Refactor code using csv library.
+# 8. Write a short program that reads its own source code and prints it on the screen - see: self_source_print.rb
+
 @students = []
 
 # load students from command line argument file, if file exists
