@@ -1,6 +1,8 @@
 # EXERCISES TO COMPLETE:
-# 1. Extract the addition of students to @students[] within load_students() and input_students() into new method.
-# 2. Make program load students.csv as default if no file given on startup. Change necessary methods.
+# fin 1. Extract the addition of students to @students[] within load_students() and input_students() into new method.
+# fin 2. Make program load students.csv as default if no file given on startup. Change necessary methods.
+    # remove exit if file deosn't exist as still option to input
+    # students or choose to exit
 # 3. Refactor. Consider: method too long, name not clear enough, elegance.
 # 4. Add feedback messages for if menu selection completed successfully.
 # 5. Menu options 3 and 4, remove hardcoding of filename, ask for input.
@@ -10,16 +12,15 @@
 
 @students = []
 
-# load students from command line argument file, if file exists
-def try_load_students
-    filename = ARGV.first
-    return if filename.nil?
+# load students from command line argument file
+# load from student.csv if no file given
+def pre_load_students
+    filename = ARGV.first.nil? ? "students.csv" : ARGV.first
     if File.exists?(filename)
         load_students(filename)
         puts "Loaded #{@students.count} from #{filename}"
     else 
-        puts "Sorry, #{filename} doesn't exist"
-        exit
+        puts "Sorry, #{filename} doesn't exist, 0 loaded"
     end
 end
 
@@ -118,5 +119,5 @@ def print_footer
     puts "Overall we have #{@students.count} great students"
 end
 
-try_load_students
+pre_load_students
 interactive_menu
