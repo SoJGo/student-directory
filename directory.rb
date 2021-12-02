@@ -6,7 +6,7 @@ def try_load_students
     return if filename.nil?
     if File.exists?(filename)
         load_students(filename)
-        puts "Loaded #{"students.count"} from #{filename}"
+        puts "Loaded #{@students.count} from #{filename}"
     else 
         puts "Sorry, #{filename} doesn't exist"
         exit
@@ -43,7 +43,7 @@ def process(selection)
     when "9"
         exit # terminate program 
     else
-        puts "Please choose a number: 1 - 9" 
+        puts "Please choose a number: 1 - 4 or 9" 
   end
 end
 
