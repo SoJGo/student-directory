@@ -1,8 +1,9 @@
 # EXERCISES TO COMPLETE:
 # fin 1. Extract the addition of students to @students[] within load_students() and input_students() into new method.
 # fin 2. Make program load students.csv as default if no file given on startup. Change necessary methods.
-    # remove exit if file deosn't exist as still option to input
-    # students or choose to exit
+    # remove exit if file deosn't exist as still option to input students or choose to exit
+    # at this step makes sense to remove all traces of menu option 4
+    # but will shortly refactor this to remove student'csv hardcoding instead
 # 3. Refactor. Consider: method too long, name not clear enough, elegance.
 # 4. Add feedback messages for if menu selection completed successfully.
 # 5. Menu options 3 and 4, remove hardcoding of filename, ask for input.
@@ -12,8 +13,7 @@
 
 @students = []
 
-# load students from command line argument file
-# load from student.csv if no file given
+# load students from command line argument file - load from student.csv if no file given
 def pre_load_students
     filename = ARGV.first.nil? ? "students.csv" : ARGV.first
     if File.exists?(filename)
@@ -43,21 +43,16 @@ end
 
 def process(selection)
     case selection
-    when "1"
-        @students = input_students
-    when "2"
-        show_students
-    when "3"
-        save_students
-    when "4"
-        load_students
-    when "9"
-        exit # terminate program 
-    else
-        puts "Please choose a number: 1 - 4 or 9" 
-  end
+    when "1" then @students = input_students
+    when "2" then show_students
+    when "3" then save_students
+    when "4" then load_students
+    when "9" then exit # terminate program
+    else puts "Please choose a number: 1 - 4 or 9"
+    end
 end
 
+# methods within process
 def input_students
     puts "Enter a students name, then press enter"
     puts "To finish, hit return twice"
