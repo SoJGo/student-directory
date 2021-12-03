@@ -8,8 +8,9 @@
 # fin 4. Add feedback messages for if menu selection completed successfully.
 # fin 5. Menu options 3 and 4, remove hardcoding of filename, ask for input.
 # fin 6. Use code block to access file, not having to close it explicitly.
-# 7. Refactor code using csv library.
-# 8. Write a short program that reads its own source code and prints it on the screen - see: self_source_print.rb
+# fin 7. Refactor code using csv library.
+# fin 8. Write a short program that reads its own source code and prints it on the screen - see: self_source_print.rb
+
 require "csv"
 
 @students = []
