@@ -7,9 +7,10 @@
 # fin 3. Refactor. Consider: method too long, name not clear enough, elegance.
 # fin 4. Add feedback messages for if menu selection completed successfully.
 # fin 5. Menu options 3 and 4, remove hardcoding of filename, ask for input.
-# 6. Use code block to access file, not having to close it explicitly.
+# fin 6. Use code block to access file, not having to close it explicitly.
 # 7. Refactor code using csv library.
 # 8. Write a short program that reads its own source code and prints it on the screen - see: self_source_print.rb
+require "csv"
 
 @students = []
 
@@ -97,11 +98,9 @@ end
 
 def load_students(filename = nil)
     filename ? filename : (filename = filename_input)
-    File.open(filename, "r") do |file|
-        file.readlines.each do |line|
-            name, cohort = line.chomp.split(',')
-            add_student(name, cohort)
-        end
+    CSV.foreach(filename) do |student_info|
+        name, cohort = student_info
+        add_student(name, cohort)
     end
     puts "Students loaded from #{filename}"
 end
