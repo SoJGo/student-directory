@@ -57,6 +57,12 @@ def input_students
     puts "Enter a students name, then press enter"
     puts "To finish, hit return twice"
 
+    get_students
+
+    @students
+end
+
+def get_students
     name = STDIN.gets.chomp
     cohort = "november"
 
@@ -65,8 +71,6 @@ def input_students
         puts "Now we have #{@students.count} students"
         name = STDIN.gets.chomp
     end
-
-    @students
 end
 
 def add_student(name, cohort)
