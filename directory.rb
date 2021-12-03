@@ -5,7 +5,7 @@
     # at this step makes sense to remove all traces of menu option 4
     # but will shortly refactor this to remove student.csv hardcoding instead
 # fin 3. Refactor. Consider: method too long, name not clear enough, elegance.
-# 4. Add feedback messages for if menu selection completed successfully.
+# fin 4. Add feedback messages for if menu selection completed successfully.
 # 5. Menu options 3 and 4, remove hardcoding of filename, ask for input.
 # 6. Use code block to access file, not having to close it explicitly.
 # 7. Refactor code using csv library.
@@ -36,8 +36,8 @@ end
 def print_menu
     puts "1. Input students"
     puts "2. Show students"
-    puts "3. Save the list to students.csv"
-    puts "4. Load the list from students.csv"
+    puts "3. Save the list to a file"
+    puts "4. Load the list from a file"
     puts "9. Exit"
 end
 
@@ -84,17 +84,19 @@ def show_students
 end
 
 def save_students
-    file = File.open("students.csv", "w")
+    filename = file_name
+    file = File.open(filename, "w")
     @students.each do |student|
         student_data = [student[:name], student[:cohort]]
         csv_line = student_data.join(",")
         file.puts csv_line
     end
     file.close
-    puts "Students saved to students.csv"
+    puts "Students saved to #{filename}"
 end
 
-def load_students(filename = "students.csv")
+def load_students(filename = nil)
+    filename ? filename : (filename = file_name)
     file = File.open(filename, "r")
     file.readlines.each do |line|
         name, cohort = line.chomp.split(',')
@@ -102,6 +104,17 @@ def load_students(filename = "students.csv")
     end
     file.close 
     puts "Students loaded from #{filename}"
+end
+
+def file_name
+    puts "Please enter the name of the file:"
+    filename = STDIN.gets.chomp
+    if filename[-4..-1] == ".csv"  
+        filename 
+    else
+        puts "Not a valid .csv file" 
+        file_name
+    end
 end
 
 # methods within show_students
