@@ -3,8 +3,8 @@
 # fin 2. Make program load students.csv as default if no file given on startup. Change necessary methods.
     # remove exit if file deosn't exist as still option to input students or choose to exit
     # at this step makes sense to remove all traces of menu option 4
-    # but will shortly refactor this to remove student'csv hardcoding instead
-# 3. Refactor. Consider: method too long, name not clear enough, elegance.
+    # but will shortly refactor this to remove student.csv hardcoding instead
+# fin 3. Refactor. Consider: method too long, name not clear enough, elegance.
 # 4. Add feedback messages for if menu selection completed successfully.
 # 5. Menu options 3 and 4, remove hardcoding of filename, ask for input.
 # 6. Use code block to access file, not having to close it explicitly.
@@ -91,6 +91,7 @@ def save_students
         file.puts csv_line
     end
     file.close
+    puts "Students saved to students.csv"
 end
 
 def load_students(filename = "students.csv")
@@ -99,7 +100,8 @@ def load_students(filename = "students.csv")
         name, cohort = line.chomp.split(',')
         add_student(name, cohort)
     end
-  file.close 
+    file.close 
+    puts "Students loaded from #{filename}"
 end
 
 # methods within show_students
