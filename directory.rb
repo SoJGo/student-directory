@@ -6,7 +6,7 @@
     # but will shortly refactor this to remove student.csv hardcoding instead
 # fin 3. Refactor. Consider: method too long, name not clear enough, elegance.
 # fin 4. Add feedback messages for if menu selection completed successfully.
-# 5. Menu options 3 and 4, remove hardcoding of filename, ask for input.
+# fin 5. Menu options 3 and 4, remove hardcoding of filename, ask for input.
 # 6. Use code block to access file, not having to close it explicitly.
 # 7. Refactor code using csv library.
 # 8. Write a short program that reads its own source code and prints it on the screen - see: self_source_print.rb
@@ -84,36 +84,36 @@ def show_students
 end
 
 def save_students
-    filename = file_name
-    file = File.open(filename, "w")
-    @students.each do |student|
-        student_data = [student[:name], student[:cohort]]
-        csv_line = student_data.join(",")
-        file.puts csv_line
+    filename = filename_input
+    File.open(filename, "w") do |file|
+        @students.each do |student|
+            student_data = [student[:name], student[:cohort]]
+            csv_line = student_data.join(",")
+            file.puts csv_line
+        end
     end
-    file.close
     puts "Students saved to #{filename}"
 end
 
 def load_students(filename = nil)
-    filename ? filename : (filename = file_name)
-    file = File.open(filename, "r")
-    file.readlines.each do |line|
-        name, cohort = line.chomp.split(',')
-        add_student(name, cohort)
+    filename ? filename : (filename = filename_input)
+    File.open(filename, "r") do |file|
+        file.readlines.each do |line|
+            name, cohort = line.chomp.split(',')
+            add_student(name, cohort)
+        end
     end
-    file.close 
     puts "Students loaded from #{filename}"
 end
 
-def file_name
+def filename_input
     puts "Please enter the name of the file:"
     filename = STDIN.gets.chomp
     if filename[-4..-1] == ".csv"  
         filename 
     else
         puts "Not a valid .csv file" 
-        file_name
+        filename_input
     end
 end
 
